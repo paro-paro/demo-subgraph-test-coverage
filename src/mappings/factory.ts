@@ -12,10 +12,10 @@ export function handlePoolCreated(event: PoolCreated): void {
 export function handlePoolAdded(event: PoolAdded): void {
   const poolAddress = event.params.poolAddress
   StakePoolTemplate.create(poolAddress)
-  initStakePoolStore(poolAddress)
+  setStakePoolEntity(poolAddress)
 }
 
-function initStakePoolStore(address: Address): void {
+function setStakePoolEntity(address: Address): void {
   const contract = StakePoolContract.bind(address)
   const pool = new StakePool(address)
   pool.name = contract.name()

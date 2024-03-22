@@ -1,5 +1,5 @@
 {
-  "name": "matchstick-coverage-issue-repro",
+  "name": "matchstick-coverage-issue-reproduction",
   "private": true,
   "scripts": {
     "codegen": "graph codegen",
