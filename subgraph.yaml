@@ -1,0 +1,50 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - name: Factory
+    kind: ethereum/contract
+    network: celo-alfajores
+    source:
+      abi: Factory
+      address: '0xda706357a6f4E9524cFa667B8817c919925deAD2'
+      startBlock: 21281732
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - StakePool
+      abis:
+        - name: Factory
+          file: ./abis/Factory.json
+        - name: StakePool
+          file: ./abis/StakePool.json
+      eventHandlers:
+        - event: PoolCreated(address)
+          handler: handlePoolCreated
+        - event: PoolAdded(address)
+          handler: handlePoolAdded
+      file: ./src/mappings/factory.ts
+
+templates:
+  - name: StakePool
+    kind: ethereum/contract
+    network: celo-alfajores
+    source:
+      abi: StakePool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - StakePool
+      abis:
+        - name: StakePool
+          file: ./abis/StakePool.json
+      eventHandlers:
+        - event: Staked(uint256)
+          handler: handleStaked
+      file: ./src/mappings/stake.ts
+      

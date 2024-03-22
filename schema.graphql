@@ -1,0 +1,6 @@
+type StakePool @entity {
+  id: Bytes!
+  name: String!
+  symbol: String!
+  totalStaked: BigInt!
+}
